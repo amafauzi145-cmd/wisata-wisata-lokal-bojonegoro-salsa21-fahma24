@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Travoyage - Profil & Wisata Bojonegoro</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Cardo:ital@0;1&display=swap" rel="stylesheet">
+
+<style>
+/* ===============================
+   RESET & BASE STYLING
+   =============================== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+    text-align: center;
+    overflow-x: hidden;
+    background: #0d1a18;
+}
+
+/* ===============================
+   NAVIGATION MENU
+   =============================== */
+.navbar-custom {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 15px 0;
+    background: rgba(0,0,0,0.35);
+    backdrop-filter: blur(10px);
+}
+
+.navbar-custom .menu {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.menu-button {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 500;
+    padding: 8px 18px;
+    border-radius: 30px;
+    border: 1px solid rgba(255,255,255,0.3);
+    transition: 0.3s;
+}
+
+.menu-button:hover,
+.menu-button.active {
+    background: #f5d76e;
+    color: #0d1a18;
+    border-color: #f5d76e;
+}
+
+/* ===============================
+   BACKGROUND SINEMATIK
+   =============================== */
+.prom-gradient {
+    position: fixed;
+    inset: 0;
+    z-index: -10;
+    background:
+        linear-gradient(to bottom, rgba(135,206,235,0.3), rgba(255,255,255,0) 50%, rgba(27,67,50,0.7) 100%),
+        url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=2071&auto=format&fit=crop');
+    background-size: 115% 115%;
+    background-position: center;
+    animation: zoomAlamSmooth 30s ease-in-out infinite alternate;
+    filter: saturate(1.2) contrast(1.1);
+}
+
+.prom-gradient::before {
+    content: "";
+    position: absolute;
+    inset: -100%;
+    background:
+        radial-gradient(circle at 20% 30%, rgba(255,255,255,0.2), transparent 40%),
+        radial-gradient(circle at 80% 20%, rgba(255,255,255,0.15), transparent 50%);
+    animation: awanMengalir 100s linear infinite;
+    pointer-events: none;
+}
+
+.prom-gradient::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(110deg, rgba(255,255,255,0) 20%, rgba(255,255,255,0.12) 50%, rgba(255,255,255,0) 80%);
+    background-size: 200% 100%;
+    animation: anginSepoi 10s ease-in-out infinite;
+    mix-blend-mode: soft-light;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -8;
+    pointer-events: none;
+    background-image:
+        radial-gradient(circle at 10% 10%, rgba(255, 255, 255, 0.2) 1px, transparent 1px),
+        radial-gradient(circle at 50% 50%, rgba(162, 209, 73, 0.2) 2px, transparent 2px);
+    background-size: 100px 100px;
+    animation: partikelMelayang 40s linear infinite;
+}
+
+/* ===============================
+   ANIMASI KEYFRAMES
+   =============================== */
+@keyframes zoomAlamSmooth {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.1) translate(-1%, -2%); }
+}
+
+@keyframes anginSepoi {
+    0% { background-position: -200% 0; opacity: 0.3; }
+    50% { opacity: 0.6; }
+    100% { background-position: 200% 0; opacity: 0.3; }
+}
+
+@keyframes awanMengalir {
+    from { transform: translateX(-10%) translateY(0); }
+    to { transform: translateX(10%) translateY(-5%); }
+}
+
+@keyframes partikelMelayang {
+    from { background-position: 0 0; }
+    to { background-position: 500px -1000px; }
+}
+
+/* ===============================
+   HERO & CONTENT
+   =============================== */
+.hero { padding: 120px 20px 80px; }
+.hero-title {
+    font-size: 42px;
+    font-weight: 700;
+    color: #f5d76e;
+    font-family: 'Cardo', serif;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+}
+
+.card-feature {
+    background: rgba(255,255,255,0.1);
+    border-radius: 20px;
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 25px;
+    max-width: 800px;
+    margin: auto;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    transition: all 0.4s ease;
+}
+.card-feature:hover {
+    transform: translateY(-5px);
+    background: rgba(255,255,255,0.15);
+    border-color: #f5d76e;
+}
+
+.card-img-top { height: auto; max-height: 400px; width: 100%; object-fit: contain; border-radius: 15px; }
+.card-title-new { font-size: 24px; font-weight: 600; color: #ffe599; margin-bottom: 15px; font-family: 'Cardo', serif; }
+.card-text-new { font-size: 15px; line-height: 1.6; color: #f0f0f0; }
+
+.card-futuristic {
+    background: rgba(0,0,0,0.4);
+    border-radius: 20px;
+    padding: 25px;
+    border: 1px solid rgba(0,255,255,0.1);
+    max-width: 300px;
+    margin: auto;
+    transition: all 0.4s ease;
+}
+.card-futuristic:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 0 30px rgba(0,255,255,0.3);
+    border-color: #0ff;
+}
+.card-futuristic img {
+    border-radius: 50%;
+    width: 160px;
+    height: 160px;
+    object-fit: cover;
+    border: 3px solid #0ff;
+    box-shadow: 0 0 15px rgba(0,255,255,0.5);
+}
+.neon-subtitle { color: #0ff; text-shadow: 0 0 10px #0ff; font-weight: 600; }
+
+.video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    border-radius: 15px;
+    margin-top: 20px;
+}
+.video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+
+.footer {
+    margin-top: 80px;
+    padding: 40px 20px;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(10px);
+    font-size: 14px;
+    color: #ffd700;
+}
+.footer a { color: #fff; text-decoration: none; border-bottom: 1px dashed #ffd700; }
+
+</style>
+</head>
+
+<body>
+
+<div class="prom-gradient"></div>
+
+<!-- MENU NAVBAR -->
+<nav class="navbar-custom">
+    <div class="menu">
+        <a href="indexprofile.html" class="menu-button active">Profil</a>
+        <a href="indexwisata.html" class="menu-button">Wisata</a>
+        <a href="indexberita.html" class="menu-button">Berita</a>
+        <a href="indexkontak.html" class="menu-button">Kontak & Pesan</a>
+    </div>
+</nav>
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION MENU -->
+  <nav class="navbar navbar-expand-lg navbar-custom">
+    <div class="container justify-content-center">
+      <a href="indexprofile.html" class="menu-button">Profil</a>
+      <a href="indexwisata.html" class="menu-button">Wisata</a>
+      <a href="indexberita.html" class="menu-button">Berita</a>
+      <a href="indexkontak.html" class="menu-button">Kontak & Pesan</a>
+    </div>
+  </nav>
+  </style>
+</head>
+<body>
+
+  <div class="prom-gradient"></div>
+  <div class="batik-overlay-prom"></div>
+<!-- HERO -->
+<section class="hero">
+    <h1 class="hero-title">Berita Wisata Bojonegoro</h1>
+</section>
+
+<!-- CARDS -->
+<div class="container py-4">
+    <div class="row g-4 justify-content-center">
+        <!-- BERITA 1 -->
+        <div class="col-md-4">
+            <div class="card-feature" data-bs-toggle="modal" data-bs-target="#modalBerita1">
+                <img src="atas angin.jpeg" class="card-img-top" alt="">
+                <h5 class="card-title-new">Bumi Atas Angin Ramai Wisatawan</h5>
+                <p class="card-text-new">Wisata pegunungan di Desa Deling yang ramai dikunjungi saat libur Tahun Baru 2020.</p>
+            </div>
+        </div>
+        <!-- BERITA 2 -->
+        <div class="col-md-4">
+            <div class="card-feature" data-bs-toggle="modal" data-bs-target="#modalBerita2">
+                <img src="megahnya-masjid-an-nahdla-bojonegoro-3_169.jpeg" class="card-img-top" alt="">
+                <h5 class="card-title-new">Masjid An Nahdla Bojonegoro</h5>
+                <p class="card-text-new">Wisata religi dengan arsitektur modern yang menenangkan.</p>
+            </div>
+        </div>
+        <!-- BERITA 3 -->
+        <div class="col-md-4">
+            <div class="card-feature" data-bs-toggle="modal" data-bs-target="#modalBerita3">
+                <img src="grogoland.webp" class="card-img-top" alt="">
+                <h5 class="card-title-new">Wisata Growgoland Masih Eksis</h5>
+                <p class="card-text-new">Wisata air keluarga yang terus menjaga kenyamanan pengunjung.</p>
+            </div>
+        </div>
+        <!-- BERITA 4 -->
+        <div class="col-md-4">
+            <div class="card-feature" data-bs-toggle="modal" data-bs-target="#modalBerita4">
+                <img src="berita kebun belimbing1.jpg" class="card-img-top" alt="">
+                <h5 class="card-title-new">Agrowisata Kebun Belimbing</h5>
+                <p class="card-text-new">Dari kebun perorangan menjadi destinasi agrowisata unggulan.</p>
+            </div>
+        </div>
+        <!-- BERITA 5 -->
+        <div class="col-md-4">
+            <div class="card-feature" data-bs-toggle="modal" data-bs-target="#modalBerita5">
+                <img src="berita bendungan gerak.webp" class="card-img-top" alt="">
+                <h5 class="card-title-new">Keindahan Bendungan Gerak</h5>
+                <p class="card-text-new">Destinasi romantis dengan panorama alam memikat.</p>
+            </div>
+        </div>
+        <!-- BERITA 6 -->
+        <div class="col-md-4">
+            <div class="card-feature" data-bs-toggle="modal" data-bs-target="#modalBerita6">
+                <img src="berita wonocolo.jpeg" class="card-img-top" alt="">
+                <h5 class="card-title-new">Desa Wonocolo Wisata Migas</h5>
+                <p class="card-text-new">Pusat wisata migas pertama di Indonesia yang diminati wisatawan.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODALS -->
+<!-- MODAL 1 -->
+<div class="modal fade" id="modalBerita1" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content text-dark">
+      <div class="modal-header">
+        <h5 class="modal-title">Bumi Atas Angin Ramai Wisatawan</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <p>Bojonegoro - Satu lagi wisata Bojonegoro yang banyak dikunjungi wisatawan pada libur Tahun Baru 2020 yakni Wisata Bumi Atas Angin di Desa Deling, Kecamatan Sekar.</p>
+        <a target="_blank" href="https://bojonegorokab.go.id/berita/4283/bumi-atas-angin-juga-ramai-dikunjungi-wisatawan" class="btn btn-primary w-100">Baca Sumber</a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- MODAL 2 -->
+<div class="modal fade" id="modalBerita2" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content text-dark">
+      <div class="modal-header">
+        <h5 class="modal-title">Masjid An Nahdla Bojonegoro</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <p>Perpaduan arsitektur modern dan nuansa spiritual yang menenangkan, menjadikannya sebagai salah satu wisata religi yang tak pernah gagal menghipnotis setiap pengunjung yang datang mampir.</p>
+        <a target="_blank" href="https://www.detik.com/jatim/wisata/d-8065961/serba-serbi-masjid-an-nahdla-bojonegoro" class="btn btn-primary w-100">Baca Sumber</a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- MODAL 3 -->
+<div class="modal fade" id="modalBerita3" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content text-dark">
+      <div class="modal-header">
+        <h5 class="modal-title">Wisata Growgoland Masih Eksis</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <p>Salah satu desa wisata yang masih eksis ialah Wisata Growgoland Waterfun. Wisata yang dibuka sejak 2015 itu mampu terus mengembangkan dan menjaga agar para pengunjung tidak bosan datang ke Growgoland.</p>
+        <a target="_blank" href="https://radarbojonegoro.jawapos.com/weekend/715009312/wisata-growgoland-masih-eksis-berencana-menata-warung-warung-agar-tampak-rapi" class="btn btn-primary w-100">Baca Sumber</a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- MODAL 4 -->
+<div class="modal fade" id="modalBerita4" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content text-dark">
+      <div class="modal-header">
+        <h5 class="modal-title">Agrowisata Kebun Belimbing</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <p>Terletak di Desa Ngringinrejo, Kecamatan Kalitidu, Kabupaten Bojonegoro, Agrowisata Kebun Belimbing telah berkembang dari sekadar kebun milik perorangan menjadi salah satu destinasi agrowisata unggulan di Jawa Timur.</p>
+        <a target="_blank" href="https://radarbojonegoro.jawapos.com/life-style/715033555/agrowisata-kebun-belimbing-ngringinrejo-berawal-dari-kebun-perorangan-menjadi-destinasi-wisata" class="btn btn-primary w-100">Baca Sumber</a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- MODAL 5 -->
+<div class="modal fade" id="modalBerita5" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content text-dark">
+      <div class="modal-header">
+        <h5 class="modal-title">Keindahan Bendungan Gerak</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <p>Bendungan Gerak Bojonegoro adalah sebuah persembahan alam yang memikat, terletak di tengah sungai Bengawan Solo. Menyuguhkan panorama alam yang memesona, Bendungan Gerak menarik banyak wisatawan.</p>
+        <a target="_blank" href="https://www.gemasulawesi.com/id/kupas-tuntas/24944/keindahan-bendungan-gerak-di-bojonegoro-destinasi-wisata-romantis-yang-memikat-hati-bagi-pengunjungnya" class="btn btn-primary w-100">Baca Sumber</a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- MODAL 6 -->
+<div class="modal fade" id="modalBerita6" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content text-dark">
+      <div class="modal-header">
+        <h5 class="modal-title">Desa Wonocolo Wisata Migas</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <p>Sejak resmi dibuka oleh Pemerintah Kabupaten (Pemkab) Bojonegoro sebagai Pusat Wisata Migas pertama di Indonesia, Desa Wonocolo menjadi lokasi yang diminati wisatawan baik dalam negeri maupun mancanegara.</p>
+        <a target="_blank" href="https://www.liputan6.com/bisnis/read/3593334/mengintip-desa-wonocolo-tambang-minyak-texas-ala-indonesia" class="btn btn-primary w-100">Baca Sumber</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  &copy; 2025 Devina Andra Salsabela 21 - Fahma Alfiatul Fauziah 24<br>
+  Kontak: <a href="tel:081217391752">081217391752</a> - <a href="tel:082333878790">082333878790</a><br>
+  Alamat Sekolah: Jalan Patimura No.3, Sumbang, Bojonegoro, Jawa Timur 62115, Indonesia<br>
+  Email: <a href="mailto:salsa&fahma@gmail.com">salsa&fahma@gmail.com</a>
+</div>
+
+<!-- BOOTSTRAP JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

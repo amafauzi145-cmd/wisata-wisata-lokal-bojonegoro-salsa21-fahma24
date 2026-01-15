@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Travoyage - Profil & Wisata Bojonegoro</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Cardo:ital@0;1&display=swap" rel="stylesheet">
+
+<style>
+/* ===============================
+   RESET & BASE STYLING
+   =============================== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+    text-align: center;
+    overflow-x: hidden;
+    background: #0d1a18;
+}
+
+/* ===============================
+   NAVIGATION MENU
+   =============================== */
+.navbar-custom {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 15px 0;
+    background: rgba(0,0,0,0.35);
+    backdrop-filter: blur(10px);
+}
+
+.navbar-custom .menu {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.menu-button {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 500;
+    padding: 8px 18px;
+    border-radius: 30px;
+    border: 1px solid rgba(255,255,255,0.3);
+    transition: 0.3s;
+}
+
+.menu-button:hover,
+.menu-button.active {
+    background: #f5d76e;
+    color: #0d1a18;
+    border-color: #f5d76e;
+}
+
+/* ===============================
+   BACKGROUND SINEMATIK
+   =============================== */
+.prom-gradient {
+    position: fixed;
+    inset: 0;
+    z-index: -10;
+    background:
+        linear-gradient(to bottom, rgba(135,206,235,0.3), rgba(255,255,255,0) 50%, rgba(27,67,50,0.7) 100%),
+        url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=2071&auto=format&fit=crop');
+    background-size: 115% 115%;
+    background-position: center;
+    animation: zoomAlamSmooth 30s ease-in-out infinite alternate;
+    filter: saturate(1.2) contrast(1.1);
+}
+
+.prom-gradient::before {
+    content: "";
+    position: absolute;
+    inset: -100%;
+    background:
+        radial-gradient(circle at 20% 30%, rgba(255,255,255,0.2), transparent 40%),
+        radial-gradient(circle at 80% 20%, rgba(255,255,255,0.15), transparent 50%);
+    animation: awanMengalir 100s linear infinite;
+    pointer-events: none;
+}
+
+.prom-gradient::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(110deg, rgba(255,255,255,0) 20%, rgba(255,255,255,0.12) 50%, rgba(255,255,255,0) 80%);
+    background-size: 200% 100%;
+    animation: anginSepoi 10s ease-in-out infinite;
+    mix-blend-mode: soft-light;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -8;
+    pointer-events: none;
+    background-image:
+        radial-gradient(circle at 10% 10%, rgba(255, 255, 255, 0.2) 1px, transparent 1px),
+        radial-gradient(circle at 50% 50%, rgba(162, 209, 73, 0.2) 2px, transparent 2px);
+    background-size: 100px 100px;
+    animation: partikelMelayang 40s linear infinite;
+}
+
+/* ===============================
+   ANIMASI KEYFRAMES
+   =============================== */
+@keyframes zoomAlamSmooth {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.1) translate(-1%, -2%); }
+}
+
+@keyframes anginSepoi {
+    0% { background-position: -200% 0; opacity: 0.3; }
+    50% { opacity: 0.6; }
+    100% { background-position: 200% 0; opacity: 0.3; }
+}
+
+@keyframes awanMengalir {
+    from { transform: translateX(-10%) translateY(0); }
+    to { transform: translateX(10%) translateY(-5%); }
+}
+
+@keyframes partikelMelayang {
+    from { background-position: 0 0; }
+    to { background-position: 500px -1000px; }
+}
+
+/* ===============================
+   HERO & CONTENT
+   =============================== */
+.hero { padding: 120px 20px 80px; }
+.hero-title {
+    font-size: 42px;
+    font-weight: 700;
+    color: #f5d76e;
+    font-family: 'Cardo', serif;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+}
+
+.card-feature {
+    background: rgba(255,255,255,0.1);
+    border-radius: 20px;
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 25px;
+    max-width: 800px;
+    margin: auto;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    transition: all 0.4s ease;
+}
+.card-feature:hover {
+    transform: translateY(-5px);
+    background: rgba(255,255,255,0.15);
+    border-color: #f5d76e;
+}
+
+.card-img-top { height: auto; max-height: 400px; width: 100%; object-fit: contain; border-radius: 15px; }
+.card-title-new { font-size: 24px; font-weight: 600; color: #ffe599; margin-bottom: 15px; font-family: 'Cardo', serif; }
+.card-text-new { font-size: 15px; line-height: 1.6; color: #f0f0f0; }
+
+.card-futuristic {
+    background: rgba(0,0,0,0.4);
+    border-radius: 20px;
+    padding: 25px;
+    border: 1px solid rgba(0,255,255,0.1);
+    max-width: 300px;
+    margin: auto;
+    transition: all 0.4s ease;
+}
+.card-futuristic:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 0 30px rgba(0,255,255,0.3);
+    border-color: #0ff;
+}
+.card-futuristic img {
+    border-radius: 50%;
+    width: 160px;
+    height: 160px;
+    object-fit: cover;
+    border: 3px solid #0ff;
+    box-shadow: 0 0 15px rgba(0,255,255,0.5);
+}
+.neon-subtitle { color: #0ff; text-shadow: 0 0 10px #0ff; font-weight: 600; }
+
+.video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    border-radius: 15px;
+    margin-top: 20px;
+}
+.video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+
+.footer {
+    margin-top: 80px;
+    padding: 40px 20px;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(10px);
+    font-size: 14px;
+    color: #ffd700;
+}
+.footer a { color: #fff; text-decoration: none; border-bottom: 1px dashed #ffd700; }
+
+</style>
+</head>
+
+<body>
+
+<div class="prom-gradient"></div>
+
+<!-- MENU NAVBAR -->
+<nav class="navbar-custom">
+    <div class="menu">
+        <a href="indexprofile.html" class="menu-button active">Profil</a>
+        <a href="indexwisata.html" class="menu-button">Wisata</a>
+        <a href="indexberita.html" class="menu-button">Berita</a>
+        <a href="indexkontak.html" class="menu-button">Kontak & Pesan</a>
+    </div>
+</nav>
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION MENU -->
+  <nav class="navbar navbar-expand-lg navbar-custom">
+    <div class="container justify-content-center">
+      <a href="indexprofile.html" class="menu-button">Profil</a>
+      <a href="indexwisata.html" class="menu-button">Wisata</a>
+      <a href="indexberita.html" class="menu-button">Berita</a>
+      <a href="indexkontak.html" class="menu-button">Kontak & Pesan</a>
+    </div>
+  </nav>
+  </style>
+</head>
+<body>
+
+  <div class="prom-gradient"></div>
+  <div class="batik-overlay-prom"></div>
+
+  <section class="hero"><h1 class="hero-title">Wisata Lokal di Bojonegoro</h1></section>
+
+  <div class="container py-4">
+    <div class="row g-4 justify-content-center">
+
+      <!-- Wonocolo -->
+      <div class="col-md-4">
+        <div class="card-feature" data-bs-toggle="modal" data-bs-target="#modalWonocolo">
+          <img src="teksas-wonocolo.jpg" class="card-img-top" alt="Wonocolo">
+          <h5 class="card-title-new">Desa Wisata Wonocolo</h5>
+          <p class="card-text-new">Geosite minyak tradisional, warisan geopark Bojonegoro.</p>
+        </div>
+      </div>
+
+      <!-- Kayangan Api -->
+      <div class="col-md-4">
+        <div class="card-feature" data-bs-toggle="modal" data-bs-target="#modalKayanganApi">
+          <img src="kayangan api.jpg" class="card-img-top" alt="Kayangan Api">
+          <h5 class="card-title-new">Kayangan Api</h5>
+          <p class="card-text-new">Sumber api abadi di hutan Sendangharjo, fenomena geologi unik.</p>
+        </div>
+      </div>
+
+      <!-- Bendungan Gerak -->
+      <div class="col-md-4">
+        <div class="card-feature" data-bs-toggle="modal" data-bs-target="#modalBendunganGerak">
+          <img src="Bendung-Gerak.jpg" class="card-img-top" alt="Bendungan Gerak">
+          <h5 class="card-title-new">Bendungan Gerak</h5>
+          <p class="card-text-new">Bentang alam romantis dengan panorama waduk.</p>
+        </div>
+      </div>
+
+      <!-- Growgoland -->
+      <div class="col-md-4">
+        <div class="card-feature" data-bs-toggle="modal" data-bs-target="#modalGrowgoland">
+          <img src="growgoland berita.webp" class="card-img-top" alt="Growgoland">
+          <h5 class="card-title-new">Growgoland Waterfun</h5>
+          <p class="card-text-new">Wisata air keluarga dengan fasilitas nyaman.</p>
+        </div>
+      </div>
+
+      <!-- Kebun Belimbing -->
+      <div class="col-md-4">
+        <div class="card-feature" data-bs-toggle="modal" data-bs-target="#modalKebunBelimbing">
+          <img src="kebun belimbing.jpg" class="card-img-top" alt="Kebun Belimbing">
+          <h5 class="card-title-new">Agrowisata Kebun Belimbing</h5>
+          <p class="card-text-new">Kebun belimbing edukatif di Desa Ngringinrejo.</p>
+        </div>
+      </div>
+
+      <!-- Wana Wisata Dander -->
+      <div class="col-md-4">
+        <div class="card-feature" data-bs-toggle="modal" data-bs-target="#modalWanaDander">
+          <img src="wana wisata dander1.jpg" class="card-img-top" alt="Wana Dander">
+          <h5 class="card-title-new">Wana Wisata Dander</h5>
+          <p class="card-text-new">Hutan wisata dan waterpark di Dander, sejuk & hijau.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MODALS -->
+
+  <!-- Modal Wonocolo -->
+<div class="modal fade" id="modalWonocolo" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content text-dark">
+      
+      <div class="modal-header">
+        <h5 class="modal-title">Desa Wisata Wonocolo</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body">
+
+        <p>
+          Wonocolo adalah salah satu geosite di Bojonegoro yang dikenal karena warisan migas tradisional.
+          Menurut Dinas Pariwisata Bojonegoro, di sini masih bisa ditemukan sumur minyak tua yang dikelola secara tradisional.
+        </p>
+
+        <!-- Lokasi -->
+        <h6>Lokasi:</h6>
+        <div class="mb-3">
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3956.33746987528!2d111.9464!3d-7.1061!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e781cecd57b8f3f%3A0xe7c3c5f8f2e14e87!2sWonocolo%2C%20Bojonegoro%2C%20East%20Java!5e0!3m2!1sen!2sid!4v1618351234567"
+            width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy">
+          </iframe>
+        </div>
+
+        <!-- Video -->
+        <h6 class="mt-3">Video Wisata:</h6>
+        <div class="ratio ratio-16x9">
+          <iframe 
+            src="https://www.youtube.com/embed/_SwbavE4g24"
+            title="Video Wonocolo" 
+            allowfullscreen>
+          </iframe>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+ <!-- Modal Kayangan Api -->
+<div class="modal fade" id="modalKayanganApi" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content text-dark">
+
+      <div class="modal-header">
+        <h5 class="modal-title">Kayangan Api</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body">
+
+        <p>
+          Kayangan Api adalah sumber api abadi di kawasan hutan Desa Sendangharjo, Kecamatan Ngasem. 
+          Api ini muncul dari gas alam yang menyembur dari dalam tanah dan menyala terus-menerus.
+        </p>
+
+        <p>
+          Menurut cerita lokal, tempat ini berkaitan dengan Empu Kriyo Kusumo dari zaman Majapahit.
+        </p>
+
+        <!-- Lokasi -->
+        <h6>Lokasi:</h6>
+        <div class="mb-3">
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3956.098305145919!2d111.7880422!3d-7.2592279!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e79d548d725ad51%3A0xa51be7d8f76343ea!2sWisata%20Kayangan%20Api!5e0!3m2!1sen!2sid!4v1716500000000"
+            width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy">
+          </iframe>
+        </div>
+
+        <!-- Video -->
+        <h6 class="mt-3">Video Wisata:</h6>
+        <div class="ratio ratio-16x9">
+          <iframe 
+            src="https://www.youtube.com/embed/c0JMxv8xuPE"
+            title="Video Kayangan Api" 
+            allowfullscreen>
+          </iframe>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+  <!-- Modal Bendungan Gerak -->
+<div class="modal fade" id="modalBendunganGerak" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content text-dark">
+      <div class="modal-header">
+        <h5 class="modal-title">Bendungan Gerak</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <p>Bendungan Gerak adalah destinasi alam di Bojonegoro dengan pemandangan waduk yang luas, cocok untuk piknik dan bersantai. :contentReference[oaicite:3]{index=3}</p>
+        
+        <h6>Lokasi:</h6>
+        <div class="ratio ratio-16x9 mb-3">
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3958.4971397792563!2d111.8289184!3d-7.1351613!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7778c093400001%3A0x6d94acb698c4e83e!2sBendungan%20Gerak%2C%20Bojonegoro!5e0!3m2!1sen!2sid!4v1699999999999!5m2!1sen!2sid" 
+            style="border:0;" 
+            allowfullscreen="" 
+            loading="lazy">
+          </iframe>
+        </div>
+
+        <h6>Video Wisata:</h6>
+        <div class="ratio ratio-16x9">
+          <iframe 
+            src="https://www.youtube.com/embed/zVYbgayFUjE" 
+            title="Video Bendungan Gerak" 
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  <!-- Modal Growgoland -->
+<div class="modal fade" id="modalGrowgoland" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content text-dark">
+      <div class="modal-header">
+        <h5 class="modal-title">Growgoland Waterfun</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <p>Growgoland Waterfun adalah taman air di Bojonegoro yang populer sebagai wisata keluarga. :contentReference[oaicite:4]{index=4}</p>
+        
+        <h6>Lokasi:</h6>
+        <div class="ratio ratio-16x9 mb-3">
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3956.554230944897!2d111.8217494!3d-7.2465259!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e79d56e2e3663d3%3A0x791191f4b2217b5b!2sGrogolan%2C%20Ngunut%2C%20Kec.%20Dander%2C%20Kabupaten%20Bojonegoro%2C%20Jawa%20Timur!5e0!3m2!1sen!2sid!4v1699999999999!5m2!1sen!2sid" 
+            style="border:0;" 
+            allowfullscreen="" 
+            loading="lazy">
+          </iframe>
+        </div>
+
+        <h6>Video Wisata:</h6>
+        <div class="ratio ratio-16x9">
+          <iframe 
+            src="https://www.youtube.com/embed/W3qCkgMjPvQ" 
+            title="Video Growgoland" 
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+ <!-- Modal Kebun Belimbing -->
+<div class="modal fade" id="modalKebunBelimbing" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content text-dark">
+      <div class="modal-header">
+        <h5 class="modal-title">Agrowisata Kebun Belimbing</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <p>Kebun Belimbing Ngringinrejo adalah wisata perkebunan di Bojonegoro. Luas kebun cukup besar dan cocok untuk edukasi serta bersantai. :contentReference[oaicite:5]{index=5}</p>
+        
+        <h6>Lokasi:</h6>
+        <div class="ratio ratio-16x9 mb-3">
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3958.007178326264!2d111.825292!3d-7.1280798!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7778e90c4f032f%3A0x129b98aefc5b6c43!2sAgrowisata%20Kebun%20Belimbing%20Ngringinrejo!5e0!3m2!1sen!2sid!4v1699999999999!5m2!1sen!2sid" 
+            style="border:0;" 
+            allowfullscreen="" 
+            loading="lazy">
+          </iframe>
+        </div>
+
+        <h6>Video Wisata:</h6>
+        <div class="ratio ratio-16x9">
+          <iframe 
+            src="https://www.youtube.com/embed/n8PPecp2EGM" 
+            title="Video Kebun Belimbing" 
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  <!-- Modal Wana Wisata Dander -->
+<div class="modal fade" id="modalWanaDander" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content text-dark">
+      <div class="modal-header">
+        <h5 class="modal-title">Wana Wisata Dander</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <p>Wana Wisata Dander adalah wisata alam dan waterpark di Kecamatan Dander. Tempat yang sejuk dan cocok untuk rekreasi keluarga. :contentReference[oaicite:6]{index=6}</p>
+        
+        <h6>Lokasi:</h6>
+        <div class="ratio ratio-16x9 mb-3">
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3956.404637145878!2d111.8390035!3d-7.250252!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e79d546e2792eb9%3A0xa2658c26facc92f4!2sWana%20Wisata%20Dander!5e0!3m2!1sen!2sid!4v1699999999999!5m2!1sen!2sid" 
+            style="border:0;" 
+            allowfullscreen="" 
+            loading="lazy">
+          </iframe>
+        </div>
+
+        <h6>Video Wisata:</h6>
+        <div class="ratio ratio-16x9">
+          <iframe 
+            src="https://www.youtube.com/embed/RXh4mOnWqLo" 
+            title="Video Dander Waterpark" 
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  &copy; 2025 Devina Andra Salsabela 21 - Fahma Alfiatul Fauziah 24<br>
+  Kontak: <a href="tel:081217391752">081217391752</a> - <a href="tel:082333878790">082333878790</a><br>
+  Alamat Sekolah: Jalan Patimura No.3, Sumbang, Bojonegoro, Sumbang, Kec. Bojonegoro, Kabupaten Bojonegoro, Jawa Timur 62115, Indonesia<br>
+  Email: <a href="mailto:salsa&fahma@gmail.com">salsa&fahma@gmail.com</a>
+</div>
+
+<!-- Komentar Developer -->
+<!--
+  Website dibuat oleh:
+  - Devina Andra Salsabela (21)
+  - Fahma Alfiatul Fauziah (24)
+  
+  Kontak: 081217391752 - 082333878790
+  Alamat Sekolah: SMKN 2 Bojonegoro
+  Email: salsa&fahma@gmail.com
+-->
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

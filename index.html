@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wisata Bojonegoro</title>
+    <link rel="icon" href="assets/icon-192.png">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Montserrat:wght@400;600&family=Poppins:wght@300;400;600&display=swap');
+
+        /* ===============================
+           RESET & BASE STYLING
+        =============================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            font-family: 'Montserrat', sans-serif;
+            overflow: hidden;
+            background: #0d1a18;
+        }
+
+        /* ===============================
+           BACKGROUND ALAM SINEMATIK
+        =============================== */
+        .prom-gradient {
+            position: fixed;
+            inset: 0;
+            z-index: -10;
+            background: 
+                linear-gradient(
+                    to bottom,
+                    rgba(135, 206, 235, 0.3), 
+                    rgba(255, 255, 255, 0) 50%,
+                    rgba(27, 67, 50, 0.7) 100%
+                ),
+                url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=2071&auto=format&fit=crop');
+            background-size: 115% 115%;
+            background-position: center;
+            animation: zoomAlamSmooth 30s ease-in-out infinite alternate;
+            filter: saturate(1.2) contrast(1.1);
+        }
+
+        /* 🌫️ Efek Cahaya Sepoi-Sepoi */
+        .prom-gradient::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                110deg,
+                rgba(255, 255, 255, 0) 20%,
+                rgba(255, 255, 255, 0.12) 50%,
+                rgba(255, 255, 255, 0) 80%
+            );
+            background-size: 200% 100%;
+            animation: anginSepoi 10s ease-in-out infinite;
+            mix-blend-mode: soft-light;
+        }
+
+        /* 🍃 Partikel Debu Alam Melayang */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -8;
+            pointer-events: none;
+            background-image: 
+                radial-gradient(circle at 10% 10%, rgba(255, 255, 255, 0.2) 1px, transparent 1px),
+                radial-gradient(circle at 50% 50%, rgba(162, 209, 73, 0.2) 2px, transparent 2px);
+            background-size: 100px 100px;
+            animation: partikelMelayang 40s linear infinite;
+        }
+
+        /* ===============================
+           ANIMATIONS KEYFRAMES
+        =============================== */
+        @keyframes zoomAlamSmooth {
+            0% { transform: scale(1) translate(0, 0); }
+            100% { transform: scale(1.1) translate(-1%, -2%); }
+        }
+
+        @keyframes anginSepoi {
+            0% { background-position: -200% 0; opacity: 0.3; }
+            50% { opacity: 0.6; }
+            100% { background-position: 200% 0; opacity: 0.3; }
+        }
+
+        @keyframes partikelMelayang {
+            from { background-position: 0 0; }
+            to { background-position: 500px -1000px; }
+        }
+
+        /* ===============================
+           UI ELEMENTS
+        =============================== */
+        .logo {
+            position: absolute;
+            top: 25px;
+            left: 30px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8em;
+            font-weight: 700;
+            color: #ffd700;
+            text-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            z-index: 10;
+        }
+
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 60px 50px;
+            border-radius: 30px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            z-index: 5;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            max-width: 900px;
+        }
+
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            color: #f5d76e;
+            text-shadow: 2px 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .subtitle {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.2em;
+            font-weight: 400;
+            margin-bottom: 40px;
+            color: #e0e0e0;
+            letter-spacing: 1px;
+        }
+
+        .menu-buttons {
+            margin-top: 20px;
+        }
+
+        .menu-button {
+            display: inline-block;
+            padding: 12px 35px;
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #1b4332;
+            background-color: #ffd700;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            margin: 10px 15px;
+        }
+
+        .menu-button:hover {
+            background-color: #fff;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.4);
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 30px;
+            text-align: center;
+            font-size: 0.85em;
+            color: rgba(255, 255, 255, 0.8);
+            z-index: 5;
+            width: 100%;
+            line-height: 1.6;
+        }
+
+        .footer a {
+            color: #ffd700;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.2em; }
+            .container { width: 90%; padding: 40px 20px; }
+            .menu-button { width: 80%; margin: 10px auto; display: block; }
+            .footer { font-size: 0.75em; padding: 0 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="prom-gradient"></div>
+
+    <div class="logo">🎭SalFa</div>
+
+    <div class="container">
+        <h1>WISATA LOKAL BOJONEGORO</h1>
+        <div class="subtitle">Jelajahi Indahnya Wisata-Wisata di Bojonegoro</div>
+
+        <div class="menu-buttons">
+            <a href="indexprofile.html" class="menu-button">Profil</a>
+            <a href="indexwisata.html" class="menu-button">Wisata</a>
+            <a href="indexberita.html" class="menu-button">Berita</a>
+            <a href="indexkontak.html" class="menu-button">Kontak & Pesan</a>
+        </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2025 Devina Andra Salsabela - Fahma Alfiatul Fauziah<br>
+        SMKN 2 Bojonegoro | Kontak: <a href="tel:081217391752">081217391752</a><br>
+        Email: <a href="mailto:salsa&fahma@gmail.com">salsa&fahma@gmail.com</a>
+    </div>
+
+</body>
+</html>
